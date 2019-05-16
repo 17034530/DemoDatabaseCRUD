@@ -97,17 +97,21 @@ public class MainActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,
-                        EditActivity.class);
+                if(al.size() == 0){
+                    Toast.makeText(getBaseContext(), "The list is empty insert something.", Toast.LENGTH_LONG).show();
+                }else {
+                    Intent i = new Intent(MainActivity.this,
+                            EditActivity.class);
 
-                String data = al.get(0);
-                String id = data.split(",")[0].split(":")[1];
-                String content = data.split(",")[1].trim();
+                    String data = al.get(0);
+                    String id = data.split(",")[0].split(":")[1];
+                    String content = data.split(",")[1].trim();
 
-                Note target = new Note(Integer.parseInt(id), content);
-                i.putExtra("data", target);
-                //startActivity(i);
-                startActivityForResult(i, 9);
+                    Note target = new Note(Integer.parseInt(id), content);
+                    i.putExtra("data", target);
+                    //startActivity(i);
+                    startActivityForResult(i, 9);
+                }
             }
         });
 
